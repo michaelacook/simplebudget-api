@@ -20,6 +20,12 @@ module.exports = {
       password: {
         type: Sequelize.STRING,
       },
+      netSalary: {
+        type: Sequelize.FLOAT,
+      },
+      netMonthlyIncome: {
+        type: Sequelize.FLOAT,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
