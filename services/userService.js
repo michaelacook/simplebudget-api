@@ -4,16 +4,16 @@ const { User, Budget, Category } = require("../models/index")
 module.exports = {
   /**
    * Get a single user by id
-   * @param {String} email - user PK
+   * @param {String} id - user PK
    * @param {Boolean} budget - default false, used to determine budget eager load
    * @return {Promise} user on success, err on fail
    */
-  getUser: async (email, budget = false) => {
+  getUser: async (id, budget = false) => {
     try {
       await User.sync()
       const options = {
         where: {
-          email: email,
+          id: id,
         },
       }
       if (budget) {
