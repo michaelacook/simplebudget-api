@@ -3,7 +3,7 @@ const router = express.Router()
 const userController = require("../controllers/userController")
 const authorization = require("../middleware/authorization")()
 
-router.get("/user", authorization, (req, res, next) => {
+router.get("/", authorization, (req, res, next) => {
   userController.getUser(req, res, next)
 })
 
