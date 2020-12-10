@@ -8,12 +8,12 @@ module.exports = {
    * @param {Boolean} budget - default false, used to determine budget eager load
    * @return {Promise} user on success, err on fail
    */
-  getUser: async (id, budget = false) => {
+  getUser: async (email, budget = false) => {
     try {
       await User.sync()
       const options = {
         where: {
-          id: id,
+          email: email,
         },
       }
       if (budget) {
