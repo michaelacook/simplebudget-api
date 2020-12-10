@@ -1,8 +1,9 @@
 const express = require("express")
 const router = express.Router()
 const userController = require("../controllers/userController")
+const authorization = require("../middleware/authorization")()
 
-router.get("/:id", (req, res, next) => {
+router.get("/user", authorization, (req, res, next) => {
   userController.getUser(req, res, next)
 })
 
