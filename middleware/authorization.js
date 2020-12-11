@@ -21,14 +21,13 @@ module.exports = () => {
         if (authed) {
           req.user = user
           return next()
+        } else {
+          message = "Incorrect email or password."
         }
       } else {
         message = "User not found."
       }
-    } else {
-      message = "Incorrect email or password."
     }
-    console.log(message)
     return res.status(401).json({ message })
   }
 }
