@@ -11,12 +11,11 @@ module.exports = () => {
    * On fail return 401 status with a message
    */
   return async function (req, res, next) {
-    let message
+    let message = "Something went wrong."
     const credentials = auth(req)
     if (credentials) {
       const { name, pass } = credentials
       const user = await userService.getUser(name)
-      console.log("password: ", pass)
       if (user) {
         const authed = bcrypt.compareSync(pass, user.password)
         if (authed) {
@@ -29,6 +28,7 @@ module.exports = () => {
     } else {
       message = "Incorrect email or password."
     }
+    console.log(message)
     return res.status(401).json({ message })
   }
 }
