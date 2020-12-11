@@ -12,7 +12,7 @@ module.exports = {
     try {
       const email = req.user.email
       const budget = req.query.budget
-      const user = await userService.getUser(id, budget ? true : null)
+      const user = await userService.getUser(email, budget ? true : null)
       return res.status(200).json(user)
     } catch (err) {
       next(err)

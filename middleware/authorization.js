@@ -2,7 +2,7 @@
 
 const auth = require("basic-auth")
 const bcrypt = require("bcryptjs")
-const UserService = require("../services/userService")
+const userService = require("../services/userService")
 
 module.exports = () => {
   /**
@@ -15,7 +15,8 @@ module.exports = () => {
     const credentials = auth(req)
     if (credentials) {
       const { name, pass } = credentials
-      const user = await UserService.getUser(name)
+      const user = await userService.getUser(name)
+      console.log("password: ", pass)
       if (user) {
         const authed = bcrypt.compareSync(pass, user.password)
         if (authed) {

@@ -3,11 +3,7 @@ const path = require("path")
 const cookieParser = require("cookie-parser")
 const createError = require("http-errors")
 const logger = require("morgan")
-
-let cors
-if (process.env.NODE_ENV === "production") {
-  cors = require("cors")
-}
+const cors = require("cors")
 
 const indexRouter = require("./routes/index")
 const usersRouter = require("./routes/users")
@@ -16,9 +12,7 @@ const billsRouter = require("./routes/bills")
 
 const app = express()
 
-if (cors) {
-  app.use(cors())
-}
+app.use(cors())
 app.use(logger("dev"))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -42,6 +36,7 @@ app.use((err, req, res, next) => {
       message: err.message,
       stack: err.stack,
     })
+    console.log(err.message, err.stack)
   } else {
     res.status(err.status || 500).json(err.message)
   }
