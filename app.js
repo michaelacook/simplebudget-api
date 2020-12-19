@@ -21,8 +21,8 @@ app.use(express.static(path.join(__dirname, "public")))
 
 app.use("/", indexRouter)
 app.use("/user", usersRouter)
-app.use("/budgets", budgetsRouter)
-app.use("/bills", billsRouter)
+app.use("/budget", budgetsRouter)
+app.use("/bill", billsRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
