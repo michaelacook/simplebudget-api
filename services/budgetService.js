@@ -1,8 +1,53 @@
 const { Budget, Category } = require("../models/index")
 
 module.exports = {
-  getBudget: async (id) => {
+  /**
+   * Get a budget
+   * @param {Number} id - PK for budget
+   * @param {Boolean} categories - true by default, if false don't eager load budget categories
+   * @return {Promise} budget on success, rejected promise on fail
+   */
+  getBudget: async (id, categories = true) => {
     try {
+      await Budget.sync()
+      const options = {
+        where: {
+          id: id,
+        },
+      }
+      if (categories) {
+        options["include"] = {
+          model: Category,
+        }
+      }
+      const budget = await Budget.findOne(options)
+      return budget
+    } catch (err) {
+      Promise.reject(err)
+    }
+  },
+
+  /**
+   * Get all budgets for a user
+   * @param {Number} userId - user PK
+   * @param {Boolean} categories - true by default, if false don't eager load budget categories
+   * @return {Promise} budget on success, rejected promise on fail
+   */
+  getAllBudgets: async (userId, categories = true) => {
+    try {
+      await Budget.sync()
+      const options = {
+        where: {
+          userId: userId,
+        },
+      }
+      if (categories) {
+        options["include"] = {
+          model: Categorty,
+        }
+      }
+      const budgets = await Budget.findAll(options)
+      return budgets
     } catch (err) {
       Promise.reject(err)
     }
@@ -21,7 +66,7 @@ module.exports = {
         title,
         description,
         total,
-        userId
+        userId,
       })
       categories.forEach(async (category) => {
         const key = Object.keys(category)[0]
