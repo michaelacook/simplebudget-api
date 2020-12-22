@@ -68,6 +68,7 @@ module.exports = {
         total,
         userId,
       })
+      await Category.sync()
       categories.forEach(async (category) => {
         const key = Object.keys(category)[0]
         const value = Object.values(category)[0]
@@ -80,6 +81,43 @@ module.exports = {
       return budgetId.id
     } catch (err) {
       Promise.reject(err)
+    }
+  },
+
+  updateBudget: async (id, payload) => {
+    try {
+      /*
+      payload should contain a budgets and a categories property
+      {
+        budget: {
+          title,
+          description,
+          total
+        },
+        categories: []
+      } 
+      */
+    } catch (err) {
+      Promise.reject(err)
+    }
+  },
+
+  /**
+   * Hard delete a budget from the data store
+   * @param {Number} userId - user PK the budget belongs to
+   * @return {Promise} true on success, promise reject on fail
+   */
+  deleteBudget: async (userId) => {
+    try {
+      await Budget.sync()
+      await Budget.destroy({
+        where: {
+          id: id,
+        },
+      })
+      return true
+    } catch (error) {
+      Promise.reject(error)
     }
   },
 }

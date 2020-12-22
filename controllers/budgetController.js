@@ -18,6 +18,22 @@ module.exports = {
   },
 
   /**
+   * Handle path /budget/all
+   * @param {Object} req - HTTP request object
+   * @param {Object} res - HTTP response object
+   * @param {Func} next - next middleware call
+   */
+  getAllBudgets: async (req, res, next) => {
+    try {
+      const userId = req.user.id
+      const budgets = await budgetService.getAllBudgets(userId)
+      return res.status(201).json(budgets)
+    } catch (error) {
+      next(error)
+    }
+  },
+
+  /**
    * Handle path /budget/new POST
    * @param {Object} req - HTTP request object
    * @param {Object} res - HTTP response object
@@ -28,6 +44,39 @@ module.exports = {
       const payload = req.body
       const budgetId = await budgetService.createBudget(payload)
       return res.status(201).json(budgetId)
+    } catch (error) {
+      next(error)
+    }
+  },
+
+  /**
+   * Handle path /budget/:id/update PUT
+   * @param {Object} req - HTTP request object
+   * @param {Object} res - HTTP response object
+   * @param {Func} next - next middleware call
+   */
+  putBudget: async (req, res, next) => {
+    try {
+      const payload = req.body
+      const budgetId = req.params.id
+      await budgetService.updateBudget(id, payload)
+      return res.status(204).end()
+    } catch (error) {
+      next(error)
+    }
+  },
+
+  /**
+   * Handle path /budget/:id/delete
+   * @param {Object} req - HTTP request object
+   * @param {Object} res - HTTP response object
+   * @param {Func} next - next middleware call
+   */
+  deleteBudget: async (req, res, next) => {
+    try {
+      const id = req.params.id
+      await budgetService.deleteBudget(id)
+      return res.status(204).end()
     } catch (error) {
       next(error)
     }
