@@ -42,8 +42,8 @@ module.exports = {
   postBudget: async (req, res, next) => {
     try {
       const payload = req.body
-      const budgetId = await budgetService.createBudget(payload)
-      return res.status(201).json(budgetId)
+      const budget = await budgetService.createBudget(payload)
+      return res.status(201).json(budget)
     } catch (error) {
       next(error)
     }

@@ -56,7 +56,7 @@ module.exports = {
   /**
    * Add a new budget with categories
    * @param {Object} destructured
-   * @return {Promise} budgetId on success, promise reject on fail
+   * @return {Promise} newly created budget, promise reject on fail
    */
   createBudget: async ({ budget, categories }) => {
     try {
@@ -78,7 +78,15 @@ module.exports = {
           budgetId: budgetId.id,
         })
       })
-      return budgetId.id
+      const newlyCreated = await Budget.findOne({
+        where: {
+          id: budgetId.id,
+        },
+        include: {
+          model: Category,
+        },
+      })
+      return newlyCreated
     } catch (err) {
       Promise.reject(err)
     }
