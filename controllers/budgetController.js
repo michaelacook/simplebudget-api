@@ -27,7 +27,7 @@ module.exports = {
     try {
       const userId = req.user.id
       const budgets = await budgetService.getAllBudgets(userId)
-      return res.status(201).json(budgets)
+      return res.status(200).json(budgets)
     } catch (error) {
       next(error)
     }

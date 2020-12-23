@@ -43,7 +43,7 @@ module.exports = {
       }
       if (categories) {
         options["include"] = {
-          model: Categorty,
+          model: Category,
         }
       }
       const budgets = await Budget.findAll(options)
