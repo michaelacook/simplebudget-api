@@ -120,7 +120,7 @@ module.exports = {
       await Budget.sync()
       await Budget.destroy({
         where: {
-          id: id,
+          id: userId,
         },
       })
       return true
