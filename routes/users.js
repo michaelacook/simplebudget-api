@@ -12,11 +12,11 @@ router.post("/create", signupValidation, (req, res, next) => {
   userController.postUser(req, res, next)
 })
 
-router.put("/:id/update", (req, res, next) => {
+router.put("/:id/update", authorization, (req, res, next) => {
   userController.putUser(req, res, next)
 })
 
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id", authorization, (req, res, next) => {
   userController.deleteUser(req, res, next)
 })
 
