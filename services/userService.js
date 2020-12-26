@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs")
-const { User, Budget, Category } = require("../models/index")
+const { User, Budget, Category, Expenditure } = require("../models/index")
 
 module.exports = {
   /**
