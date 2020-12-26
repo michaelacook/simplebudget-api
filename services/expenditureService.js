@@ -7,7 +7,7 @@ module.exports = {
    * @param {Array} expenditures - array of expenditure objects to add
    * @return {Promise} true on success, promise reject on fail
    */
-  addExpenditure: async (categoryId, expenditures) => {
+  addExpenditure: async (expenditures) => {
     try {
       await Expenditure.sync()
       expenditures.forEach(async (expenditure) => {
