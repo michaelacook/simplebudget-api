@@ -8,6 +8,7 @@ const cors = require("cors")
 const indexRouter = require("./routes/index")
 const usersRouter = require("./routes/users")
 const budgetsRouter = require("./routes/budgets")
+const expendituresRouter = require("./routes/expenditures")
 const billsRouter = require("./routes/bills")
 
 const app = express()
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, "public")))
 app.use("/", indexRouter)
 app.use("/user", usersRouter)
 app.use("/budget", budgetsRouter)
+app.use("/expenditures", expendituresRouter)
 app.use("/bill", billsRouter)
 
 // catch 404 and forward to error handler
