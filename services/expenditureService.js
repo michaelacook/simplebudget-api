@@ -25,43 +25,122 @@ module.exports = {
     }
   },
 
+  /**
+   * Get a single expenditure by PK
+   * @param {Number} id - expenditure PK
+   * @return {Promise} expenditure object on success, promise reject on fail
+   */
   getOneExpenditure: async (id) => {
     try {
+      await Expenditure.sync()
+      const expenditure = await Expenditure.findOne({
+        where: {
+          id: id,
+        },
+      })
+      return expenditure
     } catch (err) {
       Promise.reject(err)
     }
   },
 
+  /**
+   * Get all expenditures for a given year
+   * @param {Number} year
+   * @return {Promise} expenditures array on success, promise reject on fail
+   */
   getExpendituresByYear: async (year) => {
     try {
+      await Expenditure.sync()
+      const expenditures = await expenditures.findAll({
+        where: {
+          year: year,
+        },
+      })
+      return expenditures
     } catch (err) {
       Promise.reject(err)
     }
   },
 
+  /**
+   * Get all expenditures for a given month
+   * @param {Number} year
+   * @param {Number} month
+   * @return {Promise} expenditures array on success, promise reject on fail
+   */
   getExpendituresByMonth: async (year, month) => {
     try {
+      await Expenditure.sync()
+      const expenditures = await Expenditure.findAll({
+        where: {
+          year: year,
+          month: month,
+        },
+      })
+      return expenditures
     } catch (err) {
       Promise.reject(err)
     }
   },
 
+  /**
+   * Get all expenditures for a given day
+   * @param {Number} year
+   * @param {Number} month
+   * @param {Number} day
+   * @return {Promise} expenditures array on success, promise reject on fail
+   */
   getExpendituresByDay: async (year, month, day) => {
     try {
+      await Expenditure.sync()
+      const expenditures = await Expenditure.findAll({
+        where: {
+          year: year,
+          month: month,
+          day: day,
+        },
+      })
+      return expenditures
     } catch (err) {
       Promise.reject(err)
     }
   },
 
+  /**
+   * Update an expenditure in the data store
+   * @param {Number} id - expenditure PK
+   * @param {Object} payload - new values
+   * @return {Promise} boolean true on success, promise reject on fail
+   */
   updateExpenditure: async (id, payload) => {
     try {
+      await Expenditure.sync()
+      const expenditure = await Expenditure.findByPk(id)
+      for (let key in payload) {
+        expenditure[key] = payload[key]
+        await expenditure.save()
+      }
+      return true
     } catch (err) {
       Promise.reject(err)
     }
   },
 
+  /**
+   * Hard delete an expenditure record in the data store
+   * @param {Number} id - expenditure
+   * @return {Promise} boolean true on success, promise reject on fail
+   */
   deleteExpenditure: async (id) => {
     try {
+      await Expenditure.sync()
+      await Expenditure.destroy({
+        where: {
+          id: id,
+        },
+      })
+      return true
     } catch (err) {
       Promise.reject(err)
     }
