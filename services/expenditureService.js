@@ -24,4 +24,46 @@ module.exports = {
       Promise.reject(err)
     }
   },
+
+  getOneExpenditure: async (id) => {
+    try {
+    } catch (err) {
+      Promise.reject(err)
+    }
+  },
+
+  getExpendituresByYear: async (year) => {
+    try {
+    } catch (err) {
+      Promise.reject(err)
+    }
+  },
+
+  getExpendituresByMonth: async (year, month) => {
+    try {
+    } catch (err) {
+      Promise.reject(err)
+    }
+  },
+
+  getExpendituresByDay: async (year, month, day) => {
+    try {
+    } catch (err) {
+      Promise.reject(err)
+    }
+  },
+
+  updateExpenditure: async (id, payload) => {
+    try {
+    } catch (err) {
+      Promise.reject(err)
+    }
+  },
+
+  deleteExpenditure: async (id) => {
+    try {
+    } catch (err) {
+      Promise.reject(err)
+    }
+  },
 }
