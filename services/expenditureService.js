@@ -54,7 +54,7 @@ module.exports = {
   getExpendituresByYear: async (year, userId) => {
     try {
       await Expenditure.sync()
-      const expenditures = await expenditures.findAll({
+      const expenditures = await Expenditure.findAll({
         where: {
           year: year,
           userId: userId,
