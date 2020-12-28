@@ -20,24 +20,32 @@ module.exports = {
       }
       let expenditures
       if (req.query) {
-        const { month, day, year } = req.query
+        const { month, day, year, userId } = req.query
         if (month && day && year) {
           expenditures = await expenditureService.getExpendituresByDay(
             year,
             month,
-            day
+            day,
+            userId
           )
         } else if (year && month) {
           expenditures = await expenditureService.getExpendituresByMonth(
             year,
-            month
+            month,
+            userId
           )
         } else if (year) {
-          expenditures = await expenditureService.getExpendituresByYear(year)
+          expenditures = await expenditureService.getExpendituresByYear(
+            year,
+            userId
+          )
         }
       }
       const year = new Date().getFullYear()
-      expenditures = await expenditureService.getExpendituresByYear(year)
+      expenditures = await expenditureService.getExpendituresByYear(
+        year,
+        req.query.userId
+      )
       return res.status(200).json(expenditures)
     } catch (error) {
       next(error)

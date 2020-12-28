@@ -12,6 +12,7 @@ module.exports = {
       await Expenditure.sync()
       expenditures.forEach(async (expenditure) => {
         await Expenditure.create({
+          userId: expenditure.userId,
           categoryId: expenditure.categoryId,
           amount: expenditure.amount,
           year: expenditure.year,
