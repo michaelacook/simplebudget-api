@@ -1,4 +1,4 @@
-const { Category, Expenditure } = require("../models/index")
+const { Budget, Category, Expenditure } = require("../models/index")
 const { Op } = require("sequelize")
 
 module.exports = {
@@ -64,10 +64,16 @@ module.exports = {
           year: year,
           userId: userId,
         },
-        include: {
-          model: Category,
-          attributes: ["title"],
-        },
+        include: [
+          {
+            model: Category,
+            attributes: ["title"],
+          },
+          {
+            model: Budget,
+            attributes: ["id", "title"],
+          },
+        ],
       })
       return expenditures
     } catch (err) {
@@ -91,10 +97,16 @@ module.exports = {
           month: month,
           userId: userId,
         },
-        include: {
-          model: Category,
-          attributes: ["title"],
-        },
+        include: [
+          {
+            model: Category,
+            attributes: ["title"],
+          },
+          {
+            model: Budget,
+            attributes: ["id", "title"],
+          },
+        ],
       })
       return expenditures
     } catch (err) {
@@ -121,10 +133,16 @@ module.exports = {
           day,
           userId,
         },
-        include: {
-          model: Category,
-          attributes: ["title"],
-        },
+        include: [
+          {
+            model: Category,
+            attributes: ["title"],
+          },
+          {
+            model: Budget,
+            attributes: ["id", "title"],
+          },
+        ],
       })
       return expenditures
     } catch (err) {
