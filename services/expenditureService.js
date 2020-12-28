@@ -14,6 +14,7 @@ module.exports = {
       expenditures.forEach(async (expenditure) => {
         await Expenditure.create({
           userId: expenditure.userId,
+          budgetId: expenditure.budgetId,
           categoryId: expenditure.categoryId,
           amount: expenditure.amount,
           year: expenditure.year,
@@ -32,10 +33,10 @@ module.exports = {
    * @param {Number} id - expenditure PK
    * @return {Promise} expenditure object on success, promise reject on fail
    */
-  getOneExpenditure: async (id) => {
+  getOneExpenditure: async (id, budgetId = null) => {
     try {
       await Expenditure.sync()
-      const expenditure = await Expenditure.findOne({
+      const options = {
         where: {
           id: id,
         },
@@ -43,7 +44,11 @@ module.exports = {
           model: Category,
           attributes: ["title"],
         },
-      })
+      }
+      if (budgetId) {
+        options.where["budgetId"] = budgetId
+      }
+      const expenditure = await Expenditure.findOne(options)
       return expenditure
     } catch (err) {
       Promise.reject(err)
@@ -56,10 +61,10 @@ module.exports = {
    * @param {Number} userId - user PK
    * @return {Promise} expenditures array on success, promise reject on fail
    */
-  getExpendituresByYear: async (year, userId) => {
+  getExpendituresByYear: async (year, userId, budgetId = null) => {
     try {
       await Expenditure.sync()
-      const expenditures = await Expenditure.findAll({
+      const options = {
         where: {
           year: year,
           userId: userId,
@@ -74,7 +79,11 @@ module.exports = {
             attributes: ["id", "title"],
           },
         ],
-      })
+      }
+      if (budgetId) {
+        options.where["budgetId"] = budgetId
+      }
+      const expenditures = await Expenditure.findAll(options)
       return expenditures
     } catch (err) {
       Promise.reject(err)
@@ -88,10 +97,10 @@ module.exports = {
    * @param {Number} userId - user PK
    * @return {Promise} expenditures array on success, promise reject on fail
    */
-  getExpendituresByMonth: async (year, month, userId) => {
+  getExpendituresByMonth: async (year, month, userId, budgetId = null) => {
     try {
       await Expenditure.sync()
-      const expenditures = await Expenditure.findAll({
+      const options = {
         where: {
           year: year,
           month: month,
@@ -107,7 +116,11 @@ module.exports = {
             attributes: ["id", "title"],
           },
         ],
-      })
+      }
+      if (budgetId) {
+        options.where["budgetId"] = budgetId
+      }
+      const expenditures = await Expenditure.findAll(options)
       return expenditures
     } catch (err) {
       Promise.reject(err)
@@ -122,11 +135,10 @@ module.exports = {
    * @param {Number} userId - user PK
    * @return {Promise} expenditures array on success, promise reject on fail
    */
-  getExpendituresByDay: async (year, month, day, userId) => {
+  getExpendituresByDay: async (year, month, day, userId, budgetId = null) => {
     try {
-      console.log(year, month, day)
       await Expenditure.sync()
-      const expenditures = await Expenditure.findAll({
+      const options = {
         where: {
           year,
           month,
@@ -143,7 +155,11 @@ module.exports = {
             attributes: ["id", "title"],
           },
         ],
-      })
+      }
+      if (budgetId) {
+        options.where["budgetId"] = budgetId
+      }
+      const expenditures = await Expenditure.findAll(options)
       return expenditures
     } catch (err) {
       Promise.reject(err)
