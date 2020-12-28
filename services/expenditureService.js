@@ -47,14 +47,16 @@ module.exports = {
   /**
    * Get all expenditures for a given year
    * @param {Number} year
+   * @param {Number} userId - user PK
    * @return {Promise} expenditures array on success, promise reject on fail
    */
-  getExpendituresByYear: async (year) => {
+  getExpendituresByYear: async (year, userId) => {
     try {
       await Expenditure.sync()
       const expenditures = await expenditures.findAll({
         where: {
           year: year,
+          userId: userId,
         },
       })
       return expenditures
@@ -67,15 +69,17 @@ module.exports = {
    * Get all expenditures for a given month
    * @param {Number} year
    * @param {Number} month
+   * @param {Number} userId - user PK
    * @return {Promise} expenditures array on success, promise reject on fail
    */
-  getExpendituresByMonth: async (year, month) => {
+  getExpendituresByMonth: async (year, month, userId) => {
     try {
       await Expenditure.sync()
       const expenditures = await Expenditure.findAll({
         where: {
           year: year,
           month: month,
+          userId: userId,
         },
       })
       return expenditures
@@ -89,9 +93,10 @@ module.exports = {
    * @param {Number} year
    * @param {Number} month
    * @param {Number} day
+   * @param {Number} userId - user PK
    * @return {Promise} expenditures array on success, promise reject on fail
    */
-  getExpendituresByDay: async (year, month, day) => {
+  getExpendituresByDay: async (year, month, day, userId) => {
     try {
       await Expenditure.sync()
       const expenditures = await Expenditure.findAll({
@@ -99,6 +104,7 @@ module.exports = {
           year: year,
           month: month,
           day: day,
+          userId: userId,
         },
       })
       return expenditures
