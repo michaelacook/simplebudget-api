@@ -28,24 +28,26 @@ module.exports = {
             day,
             userId
           )
-        } else if (year && month) {
+        }
+        if (year && month && !day) {
           expenditures = await expenditureService.getExpendituresByMonth(
             year,
             month,
             userId
           )
-        } else if (year) {
+        } else if (year && !month && !day) {
           expenditures = await expenditureService.getExpendituresByYear(
             year,
             userId
           )
+        } else if (!year && !month && !day) {
+          const year = new Date().getFullYear()
+          expenditures = await expenditureService.getExpendituresByYear(
+            year,
+            req.query.userId
+          )
         }
       }
-      const year = new Date().getFullYear()
-      expenditures = await expenditureService.getExpendituresByYear(
-        year,
-        req.query.userId
-      )
       return res.status(200).json(expenditures)
     } catch (error) {
       next(error)

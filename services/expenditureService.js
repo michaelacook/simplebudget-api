@@ -1,4 +1,5 @@
 const { Category, Expenditure } = require("../models/index")
+const { Op } = require("sequelize")
 
 module.exports = {
   /**
@@ -111,13 +112,14 @@ module.exports = {
    */
   getExpendituresByDay: async (year, month, day, userId) => {
     try {
+      console.log(year, month, day)
       await Expenditure.sync()
       const expenditures = await Expenditure.findAll({
         where: {
-          year: year,
-          month: month,
-          day: day,
-          userId: userId,
+          year,
+          month,
+          day,
+          userId,
         },
         include: {
           model: Category,
