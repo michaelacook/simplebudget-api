@@ -2,8 +2,11 @@
 const { Model } = require("sequelize")
 module.exports = (sequelize, DataTypes) => {
   class Budget extends Model {
-    static associate({ Category, User }) {
+    static associate({ Category, Expenditure, User }) {
       Budget.hasMany(Category, {
+        foreignKey: "budgetId",
+      })
+      Budget.hasMany(Expenditure, {
         foreignKey: "budgetId",
       })
       Budget.belongsTo(User, {

@@ -5,6 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert("Expenditures", [
       {
         userId: 1,
+        budgetId: 1,
         categoryId: 1,
         amount: 12.5,
         year: 2020,
@@ -15,6 +16,7 @@ module.exports = {
       },
       {
         userId: 1,
+        budgetId: 1,
         categoryId: 3,
         amount: 49.56,
         year: 2020,
@@ -25,6 +27,7 @@ module.exports = {
       },
       {
         userId: 1,
+        budgetId: 1,
         categoryId: 4,
         amount: 12.5,
         year: 2020,
@@ -35,6 +38,7 @@ module.exports = {
       },
       {
         userId: 1,
+        budgetId: 1,
         categoryId: 2,
         amount: 1200,
         year: 2020,

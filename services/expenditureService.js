@@ -1,4 +1,4 @@
-const { Expenditure } = require("../models/index")
+const { Category, Expenditure } = require("../models/index")
 
 module.exports = {
   /**
@@ -38,6 +38,10 @@ module.exports = {
         where: {
           id: id,
         },
+        include: {
+          model: Category,
+          attributes: ["title"],
+        },
       })
       return expenditure
     } catch (err) {
@@ -58,6 +62,10 @@ module.exports = {
         where: {
           year: year,
           userId: userId,
+        },
+        include: {
+          model: Category,
+          attributes: ["title"],
         },
       })
       return expenditures
@@ -81,6 +89,10 @@ module.exports = {
           year: year,
           month: month,
           userId: userId,
+        },
+        include: {
+          model: Category,
+          attributes: ["title"],
         },
       })
       return expenditures
@@ -106,6 +118,10 @@ module.exports = {
           month: month,
           day: day,
           userId: userId,
+        },
+        include: {
+          model: Category,
+          attributes: ["title"],
         },
       })
       return expenditures

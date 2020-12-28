@@ -11,6 +11,9 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
       },
+      budgetId: {
+        type: Sequelize.INTEGER,
+      },
       categoryId: {
         type: Sequelize.INTEGER,
       },
