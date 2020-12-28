@@ -2,14 +2,18 @@
 const { Model } = require("sequelize")
 module.exports = (sequelize, DataTypes) => {
   class Expenditure extends Model {
-    static associate({ Category }) {
+    static associate({ Category, User }) {
       Expenditure.belongsTo(Category, {
         foreignKey: "categoryId",
+      })
+      Expenditure.belongsTo(User, {
+        foreignKey: "userId",
       })
     }
   }
   Expenditure.init(
     {
+      userId: DataTypes.INTEGER,
       categoryId: DataTypes.INTEGER,
       amount: DataTypes.FLOAT,
       year: DataTypes.INTEGER,
