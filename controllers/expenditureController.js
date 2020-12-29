@@ -40,7 +40,8 @@ module.exports = {
         } else if (year && !month && !day) {
           expenditures = await expenditureService.getExpendituresByYear(
             year,
-            userId
+            userId,
+            req.query.budgetId ? req.query.budgetId : null
           )
         } else if (!year && !month && !day) {
           const year = new Date().getFullYear()
