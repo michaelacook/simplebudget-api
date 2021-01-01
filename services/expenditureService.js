@@ -64,6 +64,7 @@ module.exports = {
     try {
       await Expenditure.sync()
       const options = {
+        order: [["day", "ASC"]],
         where: {
           year: year,
           userId: userId,
@@ -100,6 +101,7 @@ module.exports = {
     try {
       await Expenditure.sync()
       const options = {
+        order: [["day", "ASC"]],
         where: {
           year: year,
           month: month,
