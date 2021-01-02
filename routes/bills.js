@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const billController = require("../controllers/billController")
-const authorization = require("../middleware/authorization")
+const authorization = require("../middleware/authorization")()
 
 router.get("/:id", authorization, (req, res, next) =>
   billController.getBill(req, res, next)
