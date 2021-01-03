@@ -58,8 +58,8 @@ module.exports = {
   putBill: async (req, res, next) => {
     try {
       const id = req.params.id
-      await billService.updateBill(id, req.body)
-      return res.status(204).end()
+      const bill = await billService.updateBill(id, req.body)
+      return res.status(200).json(bill)
     } catch (error) {
       next(error)
     }

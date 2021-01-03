@@ -69,7 +69,7 @@ module.exports = {
         bill[key] = payload[key]
         await bill.save()
       }
-      return true
+      return bill
     } catch (err) {
       Promise.reject(err)
     }
