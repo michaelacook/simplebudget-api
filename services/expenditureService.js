@@ -41,7 +41,7 @@ module.exports = {
         },
         include: {
           model: Category,
-          attributes: ["title"],
+          attributes: ["title", "id"],
         },
       }
       if (budgetId) {
