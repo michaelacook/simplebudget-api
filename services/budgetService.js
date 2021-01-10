@@ -92,19 +92,46 @@ module.exports = {
     }
   },
 
+  /**
+   * Update a budget in the data store
+   * @param {Number} id - budget PK
+   * @param {Object} payload - new values
+   * @return {Object} updated budget
+   */
   updateBudget: async (id, payload) => {
     try {
-      /*
-      payload should contain a budgets and a categories property
-      {
-        budget: {
-          title,
-          description,
-          total
+      await Budget.sync()
+      await Category.sync()
+      if (payload.budget) {
+        const budget = await Budget.findByPk(id)
+        for (let key in payload.budget) {
+          budget[key] = payload.budget[key]
+          await budget.save()
+        }
+      }
+      if (payload.categories.length) {
+        payload.categories.forEach(async (cat) => {
+          const category = await Category.findOne({
+            where: {
+              id: cat.id,
+              budgetId: id,
+            },
+          })
+          for (let key in cat) {
+            category[key] = cat[key]
+            await category.save()
+          }
+        })
+      }
+      const budget = await Budget.findOne({
+        where: {
+          id,
         },
-        categories: []
-      } 
-      */
+        include: {
+          model: Category,
+        },
+      })
+      return budget
     } catch (err) {
       Promise.reject(err)
     }
