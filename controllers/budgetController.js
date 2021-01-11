@@ -50,6 +50,22 @@ module.exports = {
   },
 
   /**
+   * Handle path /budget/category/new POST
+   * @param {Object} req - HTTP request object
+   * @param {Object} res - HTTP response object
+   * @param {Func} next - next middleware call
+   */
+  postCategory: async (req, res, next) => {
+    try {
+      const payload = req.body
+      const category = await budgetService.addCategory(payload)
+      return res.status(201).json(category)
+    } catch (error) {
+      next(error)
+    }
+  },
+
+  /**
    * Handle path /budget/:id/update PUT
    * @param {Object} req - HTTP request object
    * @param {Object} res - HTTP response object
