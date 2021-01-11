@@ -138,6 +138,26 @@ module.exports = {
   },
 
   /**
+   * Add a new category for a budget
+   * @param {Object} payload
+   * @return {Object} newly created category
+   */
+  addCategory: async (payload) => {
+    try {
+      await Category.sync()
+      const { title, amount, budgetId } = payload
+      const category = Category.create({
+        title,
+        amount,
+        budgetId,
+      })
+      return category
+    } catch (error) {
+      Promise.reject(error)
+    }
+  },
+
+  /**
    * Hard delete a budget from the data store
    * @param {Number} userId - user PK the budget belongs to
    * @return {Promise} true on success, promise reject on fail
