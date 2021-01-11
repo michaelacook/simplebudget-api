@@ -11,7 +11,7 @@ router.get("/:id", (req, res, next) =>
   budgetController.getBudget(req, res, next)
 )
 
-router.put("/:id/update", (req, res, next) =>
+router.put("/:id/update", authorization, (req, res, next) =>
   budgetController.putBudget(req, res, next)
 )
 
