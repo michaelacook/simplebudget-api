@@ -158,6 +158,24 @@ module.exports = {
   },
 
   /**
+   * Hard delete a category from a budget
+   * @param {Number} id - Category PK
+   */
+  deleteCategory: async (id) => {
+    try {
+      await Category.sync()
+      await Category.destroy({
+        where: {
+          id,
+        },
+      })
+      return true
+    } catch (error) {
+      Promise.reject(error)
+    }
+  },
+
+  /**
    * Hard delete a budget from the data store
    * @param {Number} userId - user PK the budget belongs to
    * @return {Promise} true on success, promise reject on fail
