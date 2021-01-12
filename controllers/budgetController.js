@@ -83,6 +83,22 @@ module.exports = {
   },
 
   /**
+   * Handle path /budget/category/:id/delete DELETE
+   * @param {Object} req - HTTP request object
+   * @param {Object} res - HTTP response object
+   * @param {Func} next - next middleware call
+   */
+  deleteCategory: async (req, res, next) => {
+    try {
+      const id = req.params.id
+      await budgetService.deleteCategory(id)
+      return res.status(204).end()
+    } catch (error) {
+      next(error)
+    }
+  },
+
+  /**
    * Handle path /budget/:id/delete
    * @param {Object} req - HTTP request object
    * @param {Object} res - HTTP response object
