@@ -75,7 +75,7 @@ module.exports = {
     try {
       const payload = req.body
       const budgetId = req.params.id
-      await budgetService.updateBudget(id, payload)
+      await budgetService.updateBudget(budgetId, payload)
       return res.status(204).end()
     } catch (error) {
       next(error)
