@@ -23,6 +23,10 @@ router.post("/category/new", authorization, (req, res, next) =>
   budgetController.postCategory(req, res, next)
 )
 
+router.delete("/category/:id/delete", authorization, (req, res, next) =>
+  budgetController.deleteCategory(req, res, next)
+)
+
 router.delete("/:id/delete", (req, res, next) =>
   budgetController.deleteBudget(req, res, next)
 )
