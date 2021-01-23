@@ -9,7 +9,7 @@ module.exports = {
    * @param {Function} next - next middleware
    * @return {String} json on success, next middleware on fail
    */
-  getUser: async (req, res, next) => {
+  getUser: async function (req, res, next) {
     try {
       const email = req.user.email
       const budget = req.query.budget
@@ -27,7 +27,7 @@ module.exports = {
    * @param {Function} next - next middleware
    * @return {String} json on success, next middleware on fail
    */
-  postUser: async (req, res, next) => {
+  postUser: async function (req, res, next) {
     try {
       const errors = validationResult(req)
       if (!errors.isEmpty()) {
@@ -47,7 +47,7 @@ module.exports = {
    * @param {Function} next - next middleware
    * Send only a response status of 204 No Content
    */
-  putUser: async (req, res, next) => {
+  putUser: async function (req, res, next) {
     try {
       const id = req.params.id
       await userService.updateUser(id, req.body)
@@ -64,7 +64,7 @@ module.exports = {
    * @param {Function} next - next middleware
    * Send only a response status of 204 No Content
    */
-  deleteUser: async (req, res, next) => {
+  deleteUser: async function (req, res, next) {
     try {
       const id = req.params.id
       await userService.deleteUser(id)
