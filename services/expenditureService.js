@@ -7,7 +7,7 @@ module.exports = {
    * @param {Array} expenditures - array of expenditure objects to add
    * @return {Promise} true on success, promise reject on fail
    */
-  addExpenditure: async (expenditures) => {
+  addExpenditure: async function (expenditures) {
     try {
       await Expenditure.sync()
       expenditures.forEach(async (expenditure) => {
@@ -32,7 +32,7 @@ module.exports = {
    * @param {Number} id - expenditure PK
    * @return {Promise} expenditure object on success, promise reject on fail
    */
-  getOneExpenditure: async (id, budgetId = null) => {
+  getOneExpenditure: async function (id, budgetId = null) {
     try {
       await Expenditure.sync()
       const options = {
@@ -60,7 +60,7 @@ module.exports = {
    * @param {Number} userId - user PK
    * @return {Promise} expenditures array on success, promise reject on fail
    */
-  getExpendituresByYear: async (year, userId, budgetId = null) => {
+  getExpendituresByYear: async function (year, userId, budgetId = null) {
     try {
       await Expenditure.sync()
       const options = {
@@ -97,7 +97,12 @@ module.exports = {
    * @param {Number} userId - user PK
    * @return {Promise} expenditures array on success, promise reject on fail
    */
-  getExpendituresByMonth: async (year, month, userId, budgetId = null) => {
+  getExpendituresByMonth: async function (
+    year,
+    month,
+    userId,
+    budgetId = null
+  ) {
     try {
       await Expenditure.sync()
       const options = {
@@ -136,7 +141,13 @@ module.exports = {
    * @param {Number} userId - user PK
    * @return {Promise} expenditures array on success, promise reject on fail
    */
-  getExpendituresByDay: async (year, month, day, userId, budgetId = null) => {
+  getExpendituresByDay: async function (
+    year,
+    month,
+    day,
+    userId,
+    budgetId = null
+  ) {
     try {
       await Expenditure.sync()
       const options = {
@@ -173,7 +184,7 @@ module.exports = {
    * @param {Object} payload - new values
    * @return {Promise} boolean true on success, promise reject on fail
    */
-  updateExpenditure: async (id, payload) => {
+  updateExpenditure: async function (id, payload) {
     try {
       await Expenditure.sync()
       const expenditure = await Expenditure.findByPk(id)
@@ -192,7 +203,7 @@ module.exports = {
    * @param {Number} id - expenditure
    * @return {Promise} boolean true on success, promise reject on fail
    */
-  deleteExpenditure: async (id) => {
+  deleteExpenditure: async function (id) {
     try {
       await Expenditure.sync()
       await Expenditure.destroy({
