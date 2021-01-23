@@ -10,7 +10,7 @@ module.exports = {
    * @param {Object} res - HTTP response
    * @param {Func} next - next middleware call
    */
-  getExpenditure: async (req, res, next) => {
+  getExpenditure: async function (req, res, next) {
     try {
       if (req.params.id) {
         const expenditure = await expenditureService.getOneExpenditure(
@@ -64,7 +64,7 @@ module.exports = {
    * @param {Object} res - HTTP response
    * @param {Func} next - next middleware call
    */
-  postExpenditure: async (req, res, next) => {
+  postExpenditure: async function (req, res, next) {
     try {
       await expenditureService.addExpenditure(req.body)
       return res.status(201).end()
@@ -79,7 +79,7 @@ module.exports = {
    * @param {Object} res - HTTP response
    * @param {Func} next - next middleware call
    */
-  putExpenditure: async (req, res, next) => {
+  putExpenditure: async function (req, res, next) {
     try {
       const id = req.params.id
       await expenditureService.updateExpenditure(id, req.body)
@@ -95,7 +95,7 @@ module.exports = {
    * @param {Object} res - HTTP response
    * @param {Func} next - next middleware call
    */
-  deleteExpenditure: async (req, res, next) => {
+  deleteExpenditure: async function (req, res, next) {
     try {
       const id = req.params.id
       await expenditureService.deleteExpenditure(id)
@@ -105,6 +105,12 @@ module.exports = {
     }
   },
 
+  /**
+   * Handle route /expenditures/statistics/:id GET
+   * @param {Object} req - HTTP request
+   * @param {Object} res - HTTP response
+   * @param {Func} next - next middleware call
+   */
   getTotals: async function (req, res, next) {
     try {
       const budgetId = req.params.id
