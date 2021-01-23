@@ -7,7 +7,7 @@ module.exports = {
    * @param {Object} res - HTTP response object
    * @param {Func} next - next middleware call
    */
-  getBudget: async (req, res, next) => {
+  getBudget: async function (req, res, next) {
     try {
       const id = req.params.id
       const budget = await budgetService.getBudget(id)
@@ -23,7 +23,7 @@ module.exports = {
    * @param {Object} res - HTTP response object
    * @param {Func} next - next middleware call
    */
-  getAllBudgets: async (req, res, next) => {
+  getAllBudgets: async function (req, res, next) {
     try {
       const userId = req.user.id
       const budgets = await budgetService.getAllBudgets(userId)
@@ -39,7 +39,7 @@ module.exports = {
    * @param {Object} res - HTTP response object
    * @param {Func} next - next middleware call
    */
-  postBudget: async (req, res, next) => {
+  postBudget: async function (req, res, next) {
     try {
       const payload = req.body
       const budget = await budgetService.createBudget(payload)
@@ -55,7 +55,7 @@ module.exports = {
    * @param {Object} res - HTTP response object
    * @param {Func} next - next middleware call
    */
-  postCategory: async (req, res, next) => {
+  postCategory: async function (req, res, next) {
     try {
       const payload = req.body
       const category = await budgetService.addCategory(payload)
@@ -71,7 +71,7 @@ module.exports = {
    * @param {Object} res - HTTP response object
    * @param {Func} next - next middleware call
    */
-  putBudget: async (req, res, next) => {
+  putBudget: async function (req, res, next) {
     try {
       const payload = req.body
       const budgetId = req.params.id
@@ -88,7 +88,7 @@ module.exports = {
    * @param {Object} res - HTTP response object
    * @param {Func} next - next middleware call
    */
-  deleteCategory: async (req, res, next) => {
+  deleteCategory: async function (req, res, next) {
     try {
       const id = req.params.id
       await budgetService.deleteCategory(id)
@@ -104,7 +104,7 @@ module.exports = {
    * @param {Object} res - HTTP response object
    * @param {Func} next - next middleware call
    */
-  deleteBudget: async (req, res, next) => {
+  deleteBudget: async function (req, res, next) {
     try {
       const id = req.params.id
       await budgetService.deleteBudget(id)
