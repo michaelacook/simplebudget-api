@@ -283,7 +283,13 @@ module.exports = {
           total > prevTotal
             ? Number((total - prevTotal).toFixed(2))
             : Number(((prevTotal - total) * -1).toFixed(2))
-        totals[cat.title] = { total, prevTotal, difference }
+        const percentage = Number(((total / cat.amount) * 100).toFixed(2))
+        totals[cat.title] = {
+          total,
+          prevTotal,
+          difference,
+          percentageOfAmount: percentage,
+        }
       }
       const total = Number(
         Object.values(totals)
