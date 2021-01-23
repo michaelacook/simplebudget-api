@@ -288,6 +288,7 @@ module.exports = {
           total,
           prevTotal,
           difference,
+          allottedAmount: cat.amount,
           percentageOfAmount: percentage,
         }
       }
