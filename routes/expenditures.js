@@ -19,4 +19,8 @@ router.delete("/:id", authorization, (req, res, next) =>
   expenditureController.deleteExpenditure(req, res, next)
 )
 
+router.get("/statistics/:id/:year", (req, res, next) =>
+  expenditureController.getTotals(req, res, next)
+)
+
 module.exports = router

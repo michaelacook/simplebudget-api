@@ -104,4 +104,20 @@ module.exports = {
       next(error)
     }
   },
+
+  getTotals: async function (req, res, next) {
+    try {
+      const budgetId = req.params.id
+      const year = req.params.year
+      const month = req.query.month
+      const totals = await expenditureService.getExpenditureTotals(
+        budgetId,
+        year,
+        month
+      )
+      return res.status(200).json(totals)
+    } catch (error) {
+      next(error)
+    }
+  },
 }

@@ -205,4 +205,101 @@ module.exports = {
       Promise.reject(err)
     }
   },
+
+  /**
+   * Get spending totals for a given category and year, optionally month
+   * @param {Number} categoryId
+   * @param {Number} year
+   * @param {Number} month
+   * @return {Number} total
+   */
+  getExpenditureTotalByCategory: async function (
+    categoryId,
+    year,
+    month = null
+  ) {
+    try {
+      await Expenditure.sync()
+      const options = {
+        where: {
+          categoryId,
+          year,
+        },
+      }
+      if (month) {
+        options.where["month"] = month
+      }
+      const expenditures = await Expenditure.findAll(options)
+      const total = expenditures.reduce((acc, curr) => {
+        return (acc += curr.amount)
+      }, 0)
+      return total
+    } catch (err) {
+      Promise.reject(err)
+    }
+  },
+
+  /**
+   * Get spending totals stats in each category for a given year and optionally month
+   * @param {Number} budgetId
+   * @param {Number} year
+   * @param {Number} month
+   * @return {Object} totals
+   */
+  getExpenditureTotals: async function (budgetId, year, month = null) {
+    try {
+      await Category.sync()
+      await Expenditure.sync()
+      const totals = {}
+      const budgetCategories = await Category.findAll({
+        where: {
+          budgetId,
+        },
+      })
+      for (let cat of budgetCategories) {
+        const total = await this.getExpenditureTotalByCategory(
+          cat.id,
+          year,
+          month
+        )
+        let prevMonth
+        let prevYear
+        if (month) {
+          if (month == 1) {
+            prevMonth = 12
+            prevYear = year - 1
+          } else {
+            prevMonth = month - 1
+          }
+        } else {
+          prevYear = year - 1
+        }
+        const prevTotal = await this.getExpenditureTotalByCategory(
+          cat.id,
+          prevYear ? prevYear : year,
+          prevMonth
+        )
+        const difference =
+          total > prevTotal
+            ? Number((total - prevTotal).toFixed(2))
+            : Number(((prevTotal - total) * -1).toFixed(2))
+        totals[cat.title] = { total, prevTotal, difference }
+      }
+      const total = Number(
+        Object.values(totals)
+          .reduce((acc, curr) => acc + curr.total, 0)
+          .toFixed(2)
+      )
+      const prevTotal = Number(
+        Object.values(totals)
+          .reduce((acc, curr) => acc + curr.prevTotal, 0)
+          .toFixed(2)
+      )
+      totals["total"] = total
+      totals["prevTotal"] = prevTotal
+      return totals
+    } catch (error) {
+      Promise.reject(error)
+    }
+  },
 }
