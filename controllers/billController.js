@@ -7,7 +7,7 @@ module.exports = {
    * @param {Object} res - HTTP response
    * @param {Func} next - next middleware call
    */
-  getBill: async (req, res, next) => {
+  getBill: async function (req, res, next) {
     try {
       const id = req.params.id
       const bill = await billService.getBill(id)
@@ -23,7 +23,7 @@ module.exports = {
    * @param {Object} res - HTTP response
    * @param {Func} next - next middleware call
    */
-  getBills: async (req, res, next) => {
+  getBills: async function (req, res, next) {
     try {
       const userId = req.user.id
       const bills = await billService.getAllBills(userId)
@@ -39,7 +39,7 @@ module.exports = {
    * @param {Object} res - HTTP response
    * @param {Func} next - next middleware call
    */
-  postBill: async (req, res, next) => {
+  postBill: async function (req, res, next) {
     try {
       const userId = req.user.id
       const bill = await billService.addBill(userId, req.body)
@@ -55,7 +55,7 @@ module.exports = {
    * @param {Object} res - HTTP response
    * @param {Func} next - next middleware call
    */
-  putBill: async (req, res, next) => {
+  putBill: async function (req, res, next) {
     try {
       const id = req.params.id
       const bill = await billService.updateBill(id, req.body)
@@ -71,7 +71,7 @@ module.exports = {
    * @param {Object} res - HTTP response
    * @param {Func} next - next middleware call
    */
-  deleteBill: async (req, res, next) => {
+  deleteBill: async function (req, res, next) {
     try {
       const id = req.params.id
       await billService.deleteBill(id)
