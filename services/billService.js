@@ -6,7 +6,7 @@ module.exports = {
    * @param {Number} id - bill PK
    * @return {Promise} bill on success, promise reject on fail
    */
-  getBill: async (id) => {
+  getBill: async function (id) {
     try {
       await Bill.sync()
       const bill = await Bill.findByPk(id)
@@ -21,7 +21,7 @@ module.exports = {
    * @param {Number} userId - user PK
    * @return {Promise} bills on success, promise reject on fail
    */
-  getAllBills: async (userId) => {
+  getAllBills: async function (userId) {
     try {
       await Bill.sync()
       const bills = await Bill.findAll({
@@ -40,7 +40,7 @@ module.exports = {
    * @param {Number} userId - user PK
    * @param {Object} payload - data to be added from HTTP payload
    */
-  addBill: async (userId, payload) => {
+  addBill: async function (userId, payload) {
     try {
       await Bill.sync()
       const bill = await Bill.create({
@@ -61,7 +61,7 @@ module.exports = {
    * @param {Object} payload - data to be added from HTTP payload
    * @return {Promise} true on success, promise reject on fail
    */
-  updateBill: async (id, payload) => {
+  updateBill: async function (id, payload) {
     try {
       await Bill.sync()
       const bill = await Bill.findByPk(id)
@@ -80,7 +80,7 @@ module.exports = {
    * @param {Number} id - bill PK
    * @return {Promise} true on success, promise reject on fail
    */
-  deleteBill: async (id) => {
+  deleteBill: async function (id) {
     try {
       await Bill.sync()
       await Bill.destroy({
