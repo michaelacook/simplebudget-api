@@ -8,7 +8,7 @@ module.exports = {
    * @param {Boolean} budget - default false, used to determine budget eager load
    * @return {Promise} user on success, err on fail
    */
-  getUser: async (email, budget = false) => {
+  getUser: async function (email, budget = false) {
     try {
       await User.sync()
       const options = {
@@ -36,14 +36,14 @@ module.exports = {
    * @param {Object} destructured HTTP payload
    * @return {Promise} newly created user id on success, err on fail
    */
-  createUser: async ({
+  createUser: async function ({
     firstName,
     lastName,
     email,
     password,
     netSalary,
     netMonthlyIncome,
-  }) => {
+  }) {
     try {
       await User.sync()
       const salt = bcrypt.genSaltSync(4)
@@ -68,7 +68,7 @@ module.exports = {
    * @param {Object} payload - HTTP body
    * @return {Promise} true on success, err on fail
    */
-  updateUser: async (id, payload) => {
+  updateUser: async function (id, payload) {
     try {
       await User.sync()
       const user = await User.findByPk(id)
@@ -91,7 +91,7 @@ module.exports = {
    * @param {Number} id - user PK
    * @return {Promise} true on success, err on fail
    */
-  deleteUser: async (id) => {
+  deleteUser: async function (id) {
     try {
       await User.sync()
       await User.destroy({

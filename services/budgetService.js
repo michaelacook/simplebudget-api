@@ -7,7 +7,7 @@ module.exports = {
    * @param {Boolean} categories - true by default, if false don't eager load budget categories
    * @return {Promise} budget on success, rejected promise on fail
    */
-  getBudget: async (id, categories = true) => {
+  getBudget: async function (id, categories = true) {
     try {
       await Budget.sync()
       const options = {
@@ -33,7 +33,7 @@ module.exports = {
    * @param {Boolean} categories - true by default, if false don't eager load budget categories
    * @return {Promise} budget on success, rejected promise on fail
    */
-  getAllBudgets: async (userId, categories = true) => {
+  getAllBudgets: async function (userId, categories = true) {
     try {
       await Budget.sync()
       const options = {
@@ -58,7 +58,7 @@ module.exports = {
    * @param {Object} destructured
    * @return {Promise} newly created budget, promise reject on fail
    */
-  createBudget: async ({ budget, categories }) => {
+  createBudget: async function ({ budget, categories }) {
     try {
       await Budget.sync()
       const { title, description, total, userId } = budget
@@ -98,7 +98,7 @@ module.exports = {
    * @param {Object} payload - new values
    * @return {Object} updated budget
    */
-  updateBudget: async (id, payload) => {
+  updateBudget: async function (id, payload) {
     try {
       await Budget.sync()
       await Category.sync()
@@ -142,7 +142,7 @@ module.exports = {
    * @param {Object} payload
    * @return {Object} newly created category
    */
-  addCategory: async (payload) => {
+  addCategory: async function (payload) {
     try {
       await Category.sync()
       const { title, amount, budgetId } = payload
@@ -161,7 +161,7 @@ module.exports = {
    * Hard delete a category from a budget
    * @param {Number} id - Category PK
    */
-  deleteCategory: async (id) => {
+  deleteCategory: async function (id) {
     try {
       await Category.sync()
       await Category.destroy({
@@ -180,7 +180,7 @@ module.exports = {
    * @param {Number} userId - user PK the budget belongs to
    * @return {Promise} true on success, promise reject on fail
    */
-  deleteBudget: async (userId) => {
+  deleteBudget: async function (userId) {
     try {
       await Budget.sync()
       await Budget.destroy({
