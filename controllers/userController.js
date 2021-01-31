@@ -49,6 +49,10 @@ module.exports = {
    */
   putUser: async function (req, res, next) {
     try {
+      const errors = validationResult(req)
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() })
+      }
       const id = req.params.id
       const user = await userService.updateUser(id, req.body)
       return res.json(user)
