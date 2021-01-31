@@ -75,7 +75,7 @@ module.exports = {
       for (let name in payload) {
         if (name === "password") {
           const salt = bcrypt.genSaltSync(4)
-          payload[name] = bcrypt.hashSync(password, salt)
+          payload[name] = bcrypt.hashSync(payload.password, salt)
         }
         user[name] = payload[name]
         await user.save()
