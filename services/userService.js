@@ -66,7 +66,7 @@ module.exports = {
    * Update a user in the data store
    * @param {Number} id - user PK
    * @param {Object} payload - HTTP body
-   * @return {Promise} true on success, err on fail
+   * @return {Promise} user instance on success, err on fail
    */
   updateUser: async function (id, payload) {
     try {
@@ -80,7 +80,7 @@ module.exports = {
         user[name] = payload[name]
         await user.save()
       }
-      return true
+      return user
     } catch (err) {
       Promise.reject(err)
     }
