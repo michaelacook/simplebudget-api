@@ -50,8 +50,8 @@ module.exports = {
   putUser: async function (req, res, next) {
     try {
       const id = req.params.id
-      await userService.updateUser(id, req.body)
-      return res.status(204).end()
+      const user = await userService.updateUser(id, req.body)
+      return res.json(user)
     } catch (err) {
       next(err)
     }
